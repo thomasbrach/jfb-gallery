@@ -1,0 +1,4 @@
+export const AUTH = {
+  SIGN_IN_ADMIN: "SIGN_IN_ADMIN",
+  SIGN_OUT_ADMIN: "SIGN_OUT_ADMIN",
+};
