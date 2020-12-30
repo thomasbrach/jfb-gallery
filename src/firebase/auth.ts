@@ -1,9 +1,17 @@
 import { auth } from "./config";
 
-export const signIn = (email: string, password: string) => {
-  return auth.signInWithEmailAndPassword(email, password);
+type signInProps = {
+  email: string;
+  password: string;
 };
 
-export const signOut = () => {
+export const signInFirebase = (credentials: signInProps) => {
+  return auth.signInWithEmailAndPassword(
+    credentials.email,
+    credentials.password
+  );
+};
+
+export const signOutFirebase = () => {
   return auth.signOut();
 };

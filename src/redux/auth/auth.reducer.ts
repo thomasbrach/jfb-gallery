@@ -1,24 +1,31 @@
 import { AUTH } from "./auth.types";
 
 const INITIAL_STATE = {
-  authenticated: false,
-  admin: null,
+  isAuthenticated: false,
+  error: null,
 };
 
 const authReducer = (state = INITIAL_STATE, action: any) => {
   switch (action.type) {
-    case AUTH.SIGN_IN_ADMIN:
+    case AUTH.SIGN_IN_SUCCESS:
       return {
         ...state,
-        authenticated: true,
-        admin: action.payload,
+        isAuthenticated: true,
+        error: null,
       };
 
-    case AUTH.SIGN_OUT_ADMIN:
+    case AUTH.SIGN_OUT_SUCCESS:
       return {
         ...state,
-        authenticated: false,
-        admin: null,
+        isAuthenticated: false,
+        error: null,
+      };
+
+    case AUTH.SIGN_IN_FAILURE:
+    case AUTH.SIGN_OUT_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
       };
 
     default:

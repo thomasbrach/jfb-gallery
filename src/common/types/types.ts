@@ -11,4 +11,7 @@ export type Painting = {
   price: number;
 };
 
-export type Paintings = Painting[];
+export type Credentials = {
+  email: string;
+  password: string;
+};

@@ -1,4 +1,5 @@
 import React from "react";
+import LoginLayout from "../layouts/Login";
 import MainLayout from "../layouts/Main";
 import AdminView from "../views/Admin";
 import ContactView from "../views/Contact";
@@ -38,7 +39,7 @@ const RootRouter = () => {
       <RouteWithLayout
         exact
         path={ROUTES.LOGIN}
-        layout={MainLayout}
+        layout={LoginLayout}
         component={LoginView}
       />
       <RouteWithLayout
