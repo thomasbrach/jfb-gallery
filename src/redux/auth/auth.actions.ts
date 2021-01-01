@@ -17,7 +17,7 @@ export const signInFailure = (error: object) => ({
   payload: error,
 });
 
-export const signInUser = async (credentials: Credentials) => {
+export const signInUser = (credentials: Credentials) => {
   return async (dispatch: any) => {
     dispatch(signInStart());
     try {

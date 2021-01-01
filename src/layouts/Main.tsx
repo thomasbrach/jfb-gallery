@@ -1,4 +1,4 @@
-import { Container } from "@chakra-ui/react";
+import { Box, Container } from "@chakra-ui/react";
 import React from "react";
 import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
@@ -13,7 +13,9 @@ const MainLayout = (props: Props) => {
   return (
     <Container maxWidth="7xl" padding="4">
       <NavBar />
-      {children}
+      <Box height="3xl" bgColor="gray.100">
+        {children}
+      </Box>
       <Footer />
     </Container>
   );

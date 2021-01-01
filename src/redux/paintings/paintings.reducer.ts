@@ -1,10 +1,10 @@
-import { Painting } from "../../common/types/types";
+import { DBPainting } from "../../common/types/types";
 import { PAINTINGS } from "./paintings.types";
 
 const INITIAL_STATE = {
   paintings: [],
   selectedPainting: null,
-  isFetching: false,
+  isLoading: false,
   errorMessage: undefined,
 };
 
@@ -16,29 +16,31 @@ type Action = {
 const paintingsReducer = (state = INITIAL_STATE, action: Action) => {
   switch (action.type) {
     case PAINTINGS.FETCH_PAINTINGS_START:
+    case PAINTINGS.ADD_PAINTING_START:
       return {
         ...state,
-        isFetching: true,
+        isLoading: true,
       };
 
     case PAINTINGS.FETCH_PAINTINGS_SUCCESS:
       return {
         ...state,
         paintings: action.payload,
-        isFetching: false,
+        isLoading: false,
       };
 
     case PAINTINGS.FETCH_PAINTINGS_FAILURE:
+    case PAINTINGS.ADD_PAINTING_FAILURE:
       return {
         ...state,
-        isFetching: false,
+        isLoading: false,
         errorMessage: action.payload,
       };
 
-    case PAINTINGS.ADD_NEW_PAINTING:
+    case PAINTINGS.ADD_PAINTING_SUCCESS:
       return {
         ...state,
-        paintings: [...state.paintings, action.payload],
+        isLoading: false,
       };
 
     case PAINTINGS.EDIT_PAINTING:
@@ -46,7 +48,7 @@ const paintingsReducer = (state = INITIAL_STATE, action: Action) => {
         ...state,
         paintings: [
           ...state.paintings.filter(
-            (painting: Painting) => painting.id !== action.payload.id
+            (painting: DBPainting) => painting.id !== action.payload.id
           ),
           action.payload,
         ],
@@ -57,7 +59,7 @@ const paintingsReducer = (state = INITIAL_STATE, action: Action) => {
         ...state,
         paintings: [
           ...state.paintings.filter(
-            (painting: Painting) => painting.id !== action.payload
+            (painting: DBPainting) => painting.id !== action.payload
           ),
         ],
       };

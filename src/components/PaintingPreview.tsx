@@ -1,10 +1,10 @@
 import { Box, Image, Spacer } from "@chakra-ui/react";
 import React from "react";
 import { Link } from "react-router-dom";
-import { Painting } from "../common/types/types";
+import { DBPainting } from "../common/types/types";
 
 type Prop = {
-  painting: Painting;
+  painting: DBPainting;
 };
 
 const PaintingPreview = ({ painting }: Prop) => {

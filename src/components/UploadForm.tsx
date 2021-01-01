@@ -1,55 +1,62 @@
-import { Container, Flex, Heading, Spacer, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Spacer, Text } from "@chakra-ui/react";
 import React from "react";
 import { Form, Formik, FormikHelpers } from "formik";
 import Button from "./Button";
 import * as Yup from "yup";
 import FormTextInput from "./FormTextInput";
-import { ChevronRightIcon, EmailIcon, LockIcon } from "@chakra-ui/icons";
-import { signInUser } from "../redux/auth/auth.actions";
+import { CheckIcon } from "@chakra-ui/icons";
 import { useDispatch } from "react-redux";
 import Alert from "./Alert";
+import { NewPainting } from "../common/types/types";
+import { addPainting } from "../redux/paintings/paintings.actions";
 
-type Fields = {
-  email: string;
-  password: string;
-  errorMessage: string;
-};
+type Fields = NewPainting & { errorMessage: string };
 
 const initialValues = {
-  email: "",
-  password: "",
+  //   id: "",
+  name: "",
+  imageUrl: "",
+  paintedYear: "",
+  //   type: "",
+  //   description: "",
+  //   techniques: [],
+  //   size: "",
+  //   availability: false,
+  //   price: 0,
   errorMessage: "",
 };
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string().required().email(),
-  password: Yup.string().required(),
+  name: Yup.string().required(),
+  imageUrl: Yup.string().required(),
+  paintedYear: Yup.string().required(),
 });
 
-const LoginForm = () => {
+const UploadForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = async (
-    credentials: Fields,
+    painting: Fields,
     helpers: FormikHelpers<Fields>
   ) => {
     const { setSubmitting, setErrors } = helpers;
     try {
       setSubmitting(true);
-      await dispatch(signInUser(credentials));
+      await dispatch(addPainting(painting));
     } catch (error) {
       setErrors({ errorMessage: error.message });
+      console.log(error.message);
     } finally {
       setSubmitting(false);
     }
   };
 
   return (
-    <Container padding="4" borderColor="cyan.400" borderWidth="1px">
+    <Box padding="4" borderColor="cyan.400" borderWidth="1px">
       <Heading as="h1" color="cyan.400">
-        Admin Access
+        Add New Painting
       </Heading>
-      <Text>Login and manage your gallery</Text>
+      <Text>Fill in required fields to add to gallery</Text>
       <br />
 
       <Formik
@@ -60,21 +67,27 @@ const LoginForm = () => {
         {({ dirty, isValid, isSubmitting, errors }) => (
           <Form>
             <FormTextInput
-              label="Email"
-              name="email"
-              placeholder="admin@email.com"
-              type="email"
+              label="Name"
+              name="name"
+              placeholder="Name"
+              type="text"
               isRequired={true}
-              icon={EmailIcon}
             />
             <br />
             <FormTextInput
-              label="Password"
-              name="password"
-              placeholder="4dM1nP4ssW0rD!"
-              type="password"
+              label="URL"
+              name="imageUrl"
+              placeholder="https://..."
+              type="text"
               isRequired={true}
-              icon={LockIcon}
+            />
+            <br />
+            <FormTextInput
+              label="Year Painted"
+              name="paintedYear"
+              placeholder={new Date().getFullYear().toString()}
+              type="text"
+              isRequired={true}
             />
             <br />
             {errors.errorMessage && (
@@ -92,16 +105,16 @@ const LoginForm = () => {
                 color="white"
                 isDisabled={!isValid || !dirty || isSubmitting}
                 isLoading={isSubmitting}
-                content="Login"
+                content="Submit"
                 type="submit"
-                rightIcon={<ChevronRightIcon />}
+                rightIcon={<CheckIcon />}
               />
             </Flex>
           </Form>
         )}
       </Formik>
-    </Container>
+    </Box>
   );
 };
 
-export default LoginForm;
+export default UploadForm;

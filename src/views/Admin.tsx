@@ -1,13 +1,14 @@
-import { Box } from "@chakra-ui/react";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import Button from "../components/Button";
 import { AddNewPaintingToDB } from "../firebase/db";
 import { RootState } from "../redux/root.reducer";
+import UploadForm from "../components/UploadForm";
+import { Flex } from "@chakra-ui/react";
 
 const testPainting = {
-  name: "test",
+  name: "testPainting1",
   imageUrl:
     "https://lh3.googleusercontent.com/ogw/ADGmqu9m13Mri4OKtWmadxAIYX2ywXIzZkVXo3CKzezgRQ=s32-c-mo",
   paintedYear: 2020,
@@ -29,13 +30,16 @@ const AdminView = () => {
   if (!isAuthenticated) return <Redirect to="/" />;
 
   return (
-    <Box height="3xl" bgColor="gray.100">
-      <Button
-        content="Add Test"
-        color="cyan.400"
-        onClick={() => handleAddNewPainting(testPainting)}
-      />
-    </Box>
+    <>
+      <Flex>
+        <UploadForm />
+        <Button
+          content="Add Test"
+          color="cyan.400"
+          onClick={() => handleAddNewPainting(testPainting)}
+        />
+      </Flex>
+    </>
   );
 };
 
