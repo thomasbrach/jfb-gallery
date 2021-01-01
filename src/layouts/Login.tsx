@@ -1,3 +1,4 @@
+import { Center } from "@chakra-ui/react";
 import React from "react";
 
 type Props = {
@@ -7,7 +8,7 @@ type Props = {
 const LoginLayout = (props: Props) => {
   const { children } = props;
 
-  return <>{children}</>;
+  return <Center height="100vh">{children}</Center>;
 };
 
 export default LoginLayout;

@@ -1,8 +1,12 @@
-import { Box } from "@chakra-ui/react";
+import { Center } from "@chakra-ui/react";
 import React from "react";
 
 const Footer = () => {
-  return <Box>Jean-François Brach Gallery © {new Date().getFullYear()}</Box>;
+  return (
+    <Center padding="4">
+      Jean-François Brach Gallery © {new Date().getFullYear()}
+    </Center>
+  );
 };
 
 export default Footer;

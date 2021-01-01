@@ -1,4 +1,4 @@
-import { Spinner } from "@chakra-ui/react";
+import { Box, Spinner } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Painting } from "../common/types/types";
@@ -21,12 +21,12 @@ const GalleryView = () => {
   }
 
   return (
-    <div>
+    <Box height="3xl" bgColor="gray.100">
       <h1>Gallery</h1>
       {paintings.map((painting: Painting) => (
-        <PaintingPreview painting={painting} />
+        <PaintingPreview key={painting.id} painting={painting} />
       ))}
-    </div>
+    </Box>
   );
 };
 

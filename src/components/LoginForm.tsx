@@ -1,4 +1,4 @@
-import { Heading, Spacer, Text } from "@chakra-ui/react";
+import { Container, Flex, Heading, Spacer, Text } from "@chakra-ui/react";
 import React from "react";
 import { Form, Formik, FormikHelpers } from "formik";
 import Button from "./Button";
@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import FormTextInput from "./FormTextInput";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
 import { signInUser } from "../redux/auth/auth.actions";
-import { useDispatch } from "react-redux";
+import { useDispatch} from "react-redux";
 
 type Fields = {
   email: string;
@@ -36,16 +36,17 @@ const LoginForm = () => {
     try {
       dispatch(signInUser(credentials));
     } catch (error) {
-      setErrors({ errorMessage: "Invalid credentials." });
+      setErrors({ errorMessage: error.message });
     } finally {
       setSubmitting(false);
     }
   };
 
   return (
-    <>
-      <Heading>Admin Access</Heading>
+    <Container padding="4">
+      <Heading as="h1">Admin Access</Heading>
       <Text>Login and manage your gallery</Text>
+      <br />
 
       <Formik
         initialValues={initialValues}
@@ -62,6 +63,7 @@ const LoginForm = () => {
               isRequired={true}
               icon={EmailIcon}
             />
+            <br />
             <FormTextInput
               label="Password"
               name="password"
@@ -70,18 +72,21 @@ const LoginForm = () => {
               isRequired={true}
               icon={LockIcon}
             />
-            <Spacer />
-            {errors.errorMessage && <div>{errors.errorMessage}</div>}
-            <Button
-              isDisabled={!isValid || !dirty || isSubmitting}
-              isLoading={isSubmitting}
-              content="Login"
-              type="submit"
-            />
+            <br />
+            <Flex>
+              <Spacer />
+              {errors.errorMessage && <div>{errors.errorMessage}</div>}
+              <Button
+                isDisabled={!isValid || !dirty || isSubmitting}
+                isLoading={isSubmitting}
+                content="Login"
+                type="submit"
+              />
+            </Flex>
           </Form>
         )}
       </Formik>
-    </>
+    </Container>
   );
 };
 

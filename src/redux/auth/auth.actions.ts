@@ -1,6 +1,8 @@
 import { Credentials } from "../../common/types/types";
-import { signInFirebase } from "./../../firebase/auth";
+import { signInFirebase, signOutFirebase } from "./../../firebase/auth";
 import { AUTH } from "./auth.types";
+
+//---------- SIGN IN ---------- //
 
 export const signInStart = () => ({
   type: AUTH.SIGN_IN_START,
@@ -23,9 +25,12 @@ export const signInUser = (credentials: Credentials) => {
       dispatch(signInSuccess());
     } catch (error) {
       dispatch(signInFailure(error));
+      throw error;
     }
   };
 };
+
+//---------- SIGN OUT ---------- //
 
 export const signOutStart = () => ({
   type: AUTH.SIGN_OUT_START,
@@ -39,3 +44,16 @@ export const signOutFailure = (error: object) => ({
   type: AUTH.SIGN_OUT_FAILURE,
   payload: error,
 });
+
+export const SignOutUser = () => {
+  return async (dispatch: any) => {
+    dispatch(signOutStart());
+    try {
+      await signOutFirebase();
+      dispatch(signOutSuccess());
+    } catch (error) {
+      dispatch(signOutFailure(error));
+      throw error;
+    }
+  };
+};
