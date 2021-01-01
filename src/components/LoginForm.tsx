@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import FormTextInput from "./FormTextInput";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
 import { signInUser } from "../redux/auth/auth.actions";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 
 type Fields = {
   email: string;
@@ -34,7 +34,7 @@ const LoginForm = () => {
   ) => {
     const { setSubmitting, setErrors } = helpers;
     try {
-      dispatch(signInUser(credentials));
+      await dispatch(signInUser(credentials));
     } catch (error) {
       setErrors({ errorMessage: error.message });
     } finally {
