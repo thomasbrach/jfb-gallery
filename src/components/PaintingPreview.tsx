@@ -1,4 +1,4 @@
-import { Box, Image, Spacer } from "@chakra-ui/react";
+import { GridItem, Image } from "@chakra-ui/react";
 import React from "react";
 import { Link } from "react-router-dom";
 import { DBPainting } from "../common/types/types";
@@ -9,13 +9,13 @@ type Prop = {
 
 const PaintingPreview = ({ painting }: Prop) => {
   const { id, name, imageUrl } = painting;
+
   return (
-    <Box>
-      <Image src={imageUrl} alt={name} />
-      <Box>
-        {id} <Spacer /> <Link to={`/painting/${id}`}>Details</Link>
-      </Box>
-    </Box>
+    <GridItem colSpan={1} rowSpan={1} maxWidth="xs" _hover={{ opacity: 0.8 }}>
+      <Link to={`/painting/${id}`}>
+        <Image src={imageUrl} alt={name} fit="cover" height="xs" />
+      </Link>
+    </GridItem>
   );
 };
 

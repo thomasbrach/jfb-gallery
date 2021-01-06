@@ -13,9 +13,7 @@ const MainLayout = (props: Props) => {
   return (
     <Container maxWidth="7xl" padding="4">
       <NavBar />
-      <Box height="3xl" bgColor="gray.100">
-        {children}
-      </Box>
+      <Box height="3xl">{children}</Box>
       <Footer />
     </Container>
   );

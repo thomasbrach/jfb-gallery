@@ -1,5 +1,5 @@
 import {
-  EditIcon,
+  EmailIcon,
   InfoIcon,
   MoonIcon,
   SettingsIcon,
@@ -30,7 +30,7 @@ const NavBar = () => {
         <ButtonGroup>
           <Button to="/" content="Home" rightIcon={<InfoIcon />} />
           <Button to="/gallery" content="Gallery" rightIcon={<ViewIcon />} />
-          <Button to="/contact" content="Contact" rightIcon={<EditIcon />} />
+          <Button to="/contact" content="Contact" rightIcon={<EmailIcon />} />
           {isAuthenticated && (
             <>
               <Button

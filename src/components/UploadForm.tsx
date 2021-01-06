@@ -100,7 +100,7 @@ const UploadForm = () => {
             <Flex>
               <Spacer />
               <Button
-                w="2xs"
+                w="100%"
                 bgColor="cyan.400"
                 color="white"
                 isDisabled={!isValid || !dirty || isSubmitting}
