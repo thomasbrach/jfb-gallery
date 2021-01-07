@@ -98,8 +98,6 @@ const UploadForm = () => {
         duration: 5000,
         isClosable: true,
       });
-    } finally {
-      setSubmitting(false);
     }
   };
 
