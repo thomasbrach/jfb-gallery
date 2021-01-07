@@ -3,6 +3,8 @@ import { PAINTINGS } from "./paintings.types";
 
 const INITIAL_STATE = {
   paintings: [],
+  editMode: false,
+  editablePainting: null,
   selectedPainting: null,
   isLoading: false,
   errorMessage: undefined,
@@ -17,6 +19,8 @@ const paintingsReducer = (state = INITIAL_STATE, action: Action) => {
   switch (action.type) {
     case PAINTINGS.FETCH_PAINTINGS_START:
     case PAINTINGS.ADD_PAINTING_START:
+    case PAINTINGS.DELETE_PAINTING_START:
+    case PAINTINGS.EDIT_PAINTING_START:
       return {
         ...state,
         isLoading: true,
@@ -31,6 +35,8 @@ const paintingsReducer = (state = INITIAL_STATE, action: Action) => {
 
     case PAINTINGS.FETCH_PAINTINGS_FAILURE:
     case PAINTINGS.ADD_PAINTING_FAILURE:
+    case PAINTINGS.DELETE_PAINTING_FAILURE:
+    case PAINTINGS.EDIT_PAINTING_FAILURE:
       return {
         ...state,
         isLoading: false,
@@ -41,11 +47,13 @@ const paintingsReducer = (state = INITIAL_STATE, action: Action) => {
       return {
         ...state,
         isLoading: false,
+        paintings: [...state.paintings, action.payload]
       };
 
-    case PAINTINGS.EDIT_PAINTING:
+    case PAINTINGS.EDIT_PAINTING_SUCCESS:
       return {
         ...state,
+        isLoading: false,
         paintings: [
           ...state.paintings.filter(
             (painting: DBPainting) => painting.id !== action.payload.id
@@ -54,9 +62,10 @@ const paintingsReducer = (state = INITIAL_STATE, action: Action) => {
         ],
       };
 
-    case PAINTINGS.DELETE_PAINTING:
+    case PAINTINGS.DELETE_PAINTING_SUCCESS:
       return {
         ...state,
+        isLoading: false,
         paintings: [
           ...state.paintings.filter(
             (painting: DBPainting) => painting.id !== action.payload

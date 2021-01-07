@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Spacer, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Spacer, Text, useToast } from "@chakra-ui/react";
 import React from "react";
 import { Form, Formik, FormikHelpers } from "formik";
 import Button from "./Button";
@@ -6,7 +6,6 @@ import * as Yup from "yup";
 import FormTextInput from "./FormTextInput";
 import { CheckIcon } from "@chakra-ui/icons";
 import { useDispatch } from "react-redux";
-import Alert from "./Alert";
 import { NewPainting } from "../common/types/types";
 import { addPainting } from "../redux/paintings/paintings.actions";
 
@@ -37,15 +36,30 @@ const validationSchema = Yup.object().shape({
 
 const UploadForm = () => {
   const dispatch = useDispatch();
+  const toast = useToast();
 
   const handleSubmit = (painting: Fields, helpers: FormikHelpers<Fields>) => {
     const { setSubmitting, setErrors } = helpers;
     try {
       setSubmitting(true);
       dispatch(addPainting(painting));
+      toast({
+        title: "Painting added.",
+        description: "We've added the painting to your collection.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
     } catch (error) {
       setErrors({ errorMessage: error.message });
       console.log(error.message);
+      toast({
+        title: "Whoops!",
+        description: error.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
     } finally {
       setSubmitting(false);
     }
@@ -121,15 +135,7 @@ const UploadForm = () => {
               type="text"
               isRequired={true}
             />
-            <br />
-            {errors.errorMessage && (
-              <>
-                <Alert status="error" content={errors.errorMessage} />
-                <br />
-              </>
-            )}
-
-            <Flex>
+            <Flex marginTop={4}>
               <Spacer />
               <Button
                 w="100%"

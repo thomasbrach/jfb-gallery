@@ -41,8 +41,9 @@ export const addPaintingStart = () => ({
   type: PAINTINGS.ADD_PAINTING_START,
 });
 
-export const addPaintingSuccess = () => ({
+export const addPaintingSuccess = (painting: NewPainting) => ({
   type: PAINTINGS.ADD_PAINTING_SUCCESS,
+  payload: painting
 });
 export const addPaintingFailure = (errorMessage: string) => ({
   type: PAINTINGS.ADD_PAINTING_FAILURE,
@@ -54,7 +55,7 @@ export const addPainting = (painting: NewPainting) => {
     dispatch(addPaintingStart());
     try {
       await AddNewPaintingToDB(painting);
-      dispatch(addPaintingSuccess());
+      dispatch(addPaintingSuccess(painting));
     } catch (error) {
       dispatch(addPaintingFailure(error));
       throw error;
@@ -62,17 +63,41 @@ export const addPainting = (painting: NewPainting) => {
   };
 };
 
+//---------- DELETE PAINTING ---------- //
+
+export const deletePaintingStart = () => ({
+  type: PAINTINGS.DELETE_PAINTING_START,
+});
+
+export const deletePaintingSuccess = (paintingId: DBPainting["id"]) => ({
+  type: PAINTINGS.DELETE_PAINTING_SUCCESS,
+  payload: paintingId
+});
+export const deletePaintingFailure = (errorMessage: string) => ({
+  type: PAINTINGS.DELETE_PAINTING_FAILURE,
+  payload: errorMessage,
+});
+
+//---------- EDIT PAINTING ---------- //
+
+export const toggleEditMode = () => ({
+  type: PAINTINGS.TOGGLE_EDIT_MODE,
+});
+
+export const editPaintingStart = () => ({
+  type: PAINTINGS.EDIT_PAINTING_START,
+});
+
+export const editPaintingSuccess = (painting: DBPainting) => ({
+  type: PAINTINGS.EDIT_PAINTING_SUCCESS,
+  payload: painting
+});
+export const editPaintingFailure = (errorMessage: string) => ({
+  type: PAINTINGS.EDIT_PAINTING_FAILURE,
+  payload: errorMessage,
+});
+
 //---------- OTHERS ---------- //
-
-export const EditPainting = (painting: DBPainting) => ({
-  type: PAINTINGS.EDIT_PAINTING,
-  payload: painting,
-});
-
-export const DeletePainting = (paintingId: DBPainting["id"]) => ({
-  type: PAINTINGS.DELETE_PAINTING,
-  payload: paintingId,
-});
 
 export const ViewSelectedPainting = (painting: DBPainting) => ({
   type: PAINTINGS.VIEW_SELECTED_PAINTING,

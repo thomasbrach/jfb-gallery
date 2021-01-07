@@ -7,10 +7,18 @@ import {
   Image,
   Spacer,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { DBPainting } from "../common/types/types";
+import { DeletePaintingFromDB } from "../firebase/db";
+import {
+  deletePaintingFailure,
+  deletePaintingStart,
+  deletePaintingSuccess,
+} from "../redux/paintings/paintings.actions";
 
 type Prop = {
   painting: DBPainting;
@@ -28,6 +36,34 @@ const AdminPreview = ({ painting }: Prop) => {
     availability,
     price,
   } = painting;
+  const dispatch = useDispatch();
+  const toast = useToast();
+
+  const deletePainting = (paintingId: DBPainting["id"]) => {
+    return async () => {
+      dispatch(deletePaintingStart());
+      try {
+        await DeletePaintingFromDB(paintingId);
+        dispatch(deletePaintingSuccess(paintingId));
+        toast({
+          title: "Painting deleted.",
+          description: "We've deleted the painting from your collection.",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+      } catch (error) {
+        dispatch(deletePaintingFailure(error));
+        toast({
+          title: "Whoops!",
+          description: error.message,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
+    };
+  };
 
   return (
     <GridItem borderColor="cyan.400" borderWidth="1px">
@@ -65,12 +101,26 @@ const AdminPreview = ({ painting }: Prop) => {
         </Center>
         <Spacer />
         <Center>
-          <EditIcon w={8} h={8} color="cyan.400" />
+          <EditIcon
+            w={8}
+            h={8}
+            color="cyan.400"
+            onClick={() => console.log("clicked edit")}
+            cursor="pointer"
+            _hover={{ color: "cyan.600" }}
+          />
         </Center>
 
         <Spacer />
         <Center>
-          <DeleteIcon w={8} h={8} color="red.400" />
+          <DeleteIcon
+            w={8}
+            h={8}
+            color="red.400"
+            onClick={deletePainting(id)}
+            cursor="pointer"
+            _hover={{ color: "red.600" }}
+          />
         </Center>
         <Spacer />
       </Flex>

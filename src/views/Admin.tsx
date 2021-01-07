@@ -25,7 +25,7 @@ const AdminView = () => {
       <Grid gap={4} height="3xl" templateColumns="repeat(3, 1fr)">
         <UploadForm />
         <GridItem colSpan={2}>
-          <Grid gap={2} height="3xl" overflowY="auto" flexDirection="column">
+          <Grid gap={2} maxHeight="3xl" overflowY="auto" flexDirection="column">
             {paintings.map((painting: DBPainting) => (
               <AdminPreview key={painting.id} painting={painting} />
             ))}
