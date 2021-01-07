@@ -18,6 +18,7 @@ import {
   deletePaintingFailure,
   deletePaintingStart,
   deletePaintingSuccess,
+  enterEditMode,
 } from "../redux/paintings/paintings.actions";
 
 type Prop = {
@@ -65,6 +66,12 @@ const AdminPreview = ({ painting }: Prop) => {
     };
   };
 
+  const enterEditModeWithPainting = (painting: DBPainting) => {
+    return async () => {
+      dispatch(enterEditMode(painting));
+    };
+  };
+
   return (
     <GridItem borderColor="cyan.400" borderWidth="1px">
       <Flex padding={2}>
@@ -105,7 +112,7 @@ const AdminPreview = ({ painting }: Prop) => {
             w={8}
             h={8}
             color="cyan.400"
-            onClick={() => console.log("clicked edit")}
+            onClick={enterEditModeWithPainting(painting)}
             cursor="pointer"
             _hover={{ color: "cyan.600" }}
           />

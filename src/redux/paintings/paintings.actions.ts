@@ -1,9 +1,10 @@
 import {
   AddNewPaintingToDB,
   dataFromSnapshot,
+  EditPaintingInDB,
   fetchPaintingsFromDB,
 } from "./../../firebase/db";
-import { NewPainting, DBPainting } from "../../common/types/types";
+import { DBPainting } from "../../common/types/types";
 import { PAINTINGS } from "./paintings.types";
 
 //---------- FETCH PAINTINGS ---------- //
@@ -41,7 +42,7 @@ export const addPaintingStart = () => ({
   type: PAINTINGS.ADD_PAINTING_START,
 });
 
-export const addPaintingSuccess = (painting: NewPainting) => ({
+export const addPaintingSuccess = (painting: DBPainting) => ({
   type: PAINTINGS.ADD_PAINTING_SUCCESS,
   payload: painting
 });
@@ -50,7 +51,7 @@ export const addPaintingFailure = (errorMessage: string) => ({
   payload: errorMessage,
 });
 
-export const addPainting = (painting: NewPainting) => {
+export const addPainting = (painting: DBPainting) => {
   return async (dispatch: any) => {
     dispatch(addPaintingStart());
     try {
@@ -80,8 +81,9 @@ export const deletePaintingFailure = (errorMessage: string) => ({
 
 //---------- EDIT PAINTING ---------- //
 
-export const toggleEditMode = () => ({
-  type: PAINTINGS.TOGGLE_EDIT_MODE,
+export const enterEditMode = (painting: DBPainting) => ({
+  type: PAINTINGS.ENTER_EDIT_MODE,
+  payload: painting
 });
 
 export const editPaintingStart = () => ({
@@ -96,6 +98,21 @@ export const editPaintingFailure = (errorMessage: string) => ({
   type: PAINTINGS.EDIT_PAINTING_FAILURE,
   payload: errorMessage,
 });
+
+
+export const editPainting = (painting: DBPainting) => {
+  return async (dispatch: any) => {
+    dispatch(editPaintingStart());
+    try {
+      await EditPaintingInDB(painting);
+      dispatch(editPaintingSuccess(painting));
+    } catch (error) {
+      dispatch(editPaintingFailure(error));
+      throw error;
+    }
+  };
+};
+
 
 //---------- OTHERS ---------- //
 

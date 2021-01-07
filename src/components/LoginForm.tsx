@@ -1,4 +1,11 @@
-import { Container, Flex, Heading, Spacer, Text } from "@chakra-ui/react";
+import {
+  Container,
+  Flex,
+  Heading,
+  Spacer,
+  Text,
+  useToast,
+} from "@chakra-ui/react";
 import React from "react";
 import { Form, Formik, FormikHelpers } from "formik";
 import Button from "./Button";
@@ -7,7 +14,6 @@ import FormTextInput from "./FormTextInput";
 import { ChevronRightIcon, EmailIcon, LockIcon } from "@chakra-ui/icons";
 import { signInUser } from "../redux/auth/auth.actions";
 import { useDispatch } from "react-redux";
-import Alert from "./Alert";
 
 type Fields = {
   email: string;
@@ -28,6 +34,7 @@ const validationSchema = Yup.object().shape({
 
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const toast = useToast();
 
   const handleSubmit = (
     credentials: Fields,
@@ -39,6 +46,13 @@ const LoginForm = () => {
       dispatch(signInUser(credentials));
     } catch (error) {
       setErrors({ errorMessage: error.message });
+      toast({
+        title: "Whoops!",
+        description: error.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
     } finally {
       setSubmitting(false);
     }
@@ -76,14 +90,6 @@ const LoginForm = () => {
               isRequired={true}
               icon={LockIcon}
             />
-            <br />
-            {errors.errorMessage && (
-              <>
-                <Alert status="error" content={errors.errorMessage} />
-                <br />
-              </>
-            )}
-
             <Flex>
               <Spacer />
               <Button

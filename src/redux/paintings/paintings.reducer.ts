@@ -4,7 +4,18 @@ import { PAINTINGS } from "./paintings.types";
 const INITIAL_STATE = {
   paintings: [],
   editMode: false,
-  editablePainting: null,
+  editablePainting: {
+    id: "",
+    name: "",
+    imageUrl: "",
+    paintedYear: "",
+    category: "",
+    techniques: "",
+    size: "",
+    availability: "",
+    price: "",
+    errorMessage: "",
+  },
   selectedPainting: null,
   isLoading: false,
   errorMessage: undefined,
@@ -26,13 +37,6 @@ const paintingsReducer = (state = INITIAL_STATE, action: Action) => {
         isLoading: true,
       };
 
-    case PAINTINGS.FETCH_PAINTINGS_SUCCESS:
-      return {
-        ...state,
-        paintings: action.payload,
-        isLoading: false,
-      };
-
     case PAINTINGS.FETCH_PAINTINGS_FAILURE:
     case PAINTINGS.ADD_PAINTING_FAILURE:
     case PAINTINGS.DELETE_PAINTING_FAILURE:
@@ -40,8 +44,28 @@ const paintingsReducer = (state = INITIAL_STATE, action: Action) => {
       return {
         ...state,
         isLoading: false,
+        editMode: false,
+        editablePainting: {
+          id: "",
+          name: "",
+          imageUrl: "",
+          paintedYear: "",
+          category: "",
+          techniques: "",
+          size: "",
+          availability: "",
+          price: "",
+          errorMessage: "",
+        },
         errorMessage: action.payload,
       };
+
+      case PAINTINGS.FETCH_PAINTINGS_SUCCESS:
+        return {
+          ...state,
+          paintings: action.payload,
+          isLoading: false,
+        };
 
     case PAINTINGS.ADD_PAINTING_SUCCESS:
       return {
@@ -54,6 +78,19 @@ const paintingsReducer = (state = INITIAL_STATE, action: Action) => {
       return {
         ...state,
         isLoading: false,
+        editMode: false,
+        editablePainting: {
+          id: "",
+          name: "",
+          imageUrl: "",
+          paintedYear: "",
+          category: "",
+          techniques: "",
+          size: "",
+          availability: "",
+          price: "",
+          errorMessage: "",
+        },
         paintings: [
           ...state.paintings.filter(
             (painting: DBPainting) => painting.id !== action.payload.id
@@ -72,6 +109,13 @@ const paintingsReducer = (state = INITIAL_STATE, action: Action) => {
           ),
         ],
       };
+
+case PAINTINGS.ENTER_EDIT_MODE:
+  return {
+    ...state,
+    editMode: true,
+    editablePainting: action.payload
+  }
 
     default:
       return state;

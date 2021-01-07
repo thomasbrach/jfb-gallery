@@ -5,23 +5,15 @@ import Button from "./Button";
 import * as Yup from "yup";
 import FormTextInput from "./FormTextInput";
 import { CheckIcon } from "@chakra-ui/icons";
-import { useDispatch } from "react-redux";
-import { NewPainting } from "../common/types/types";
-import { addPainting } from "../redux/paintings/paintings.actions";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addPainting,
+  editPainting,
+} from "../redux/paintings/paintings.actions";
+import { RootState } from "../redux/root.reducer";
+import { DBPainting } from "../common/types/types";
 
-type Fields = NewPainting & { errorMessage: string };
-
-const initialValues = {
-  name: "",
-  imageUrl: "",
-  paintedYear: "",
-  category: "",
-  techniques: "",
-  size: "",
-  availability: "",
-  price: "",
-  errorMessage: "",
-};
+type Fields = DBPainting & { errorMessage: string };
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required(),
@@ -35,10 +27,29 @@ const validationSchema = Yup.object().shape({
 });
 
 const UploadForm = () => {
+  const { editMode, editablePainting } = useSelector(
+    (state: RootState) => state.paintings
+  );
   const dispatch = useDispatch();
   const toast = useToast();
 
-  const handleSubmit = (painting: Fields, helpers: FormikHelpers<Fields>) => {
+  //---------- INITIAL VALUES ---------- //
+
+  const initialValues = editablePainting ?? {
+    name: "",
+    imageUrl: "",
+    paintedYear: "",
+    category: "",
+    techniques: "",
+    size: "",
+    availability: "",
+    price: "",
+    errorMessage: "",
+  };
+
+  //---------- HANDLE ADD PAINTING ---------- //
+
+  const handleAdd = (painting: Fields, helpers: FormikHelpers<Fields>) => {
     const { setSubmitting, setErrors } = helpers;
     try {
       setSubmitting(true);
@@ -52,7 +63,6 @@ const UploadForm = () => {
       });
     } catch (error) {
       setErrors({ errorMessage: error.message });
-      console.log(error.message);
       toast({
         title: "Whoops!",
         description: error.message,
@@ -65,17 +75,51 @@ const UploadForm = () => {
     }
   };
 
+  //---------- HANDLE EDIT PAINTING ---------- //
+
+  const handleEdit = (painting: Fields, helpers: FormikHelpers<Fields>) => {
+    const { setSubmitting, setErrors } = helpers;
+    try {
+      setSubmitting(true);
+      dispatch(editPainting(painting));
+      toast({
+        title: "Painting edited.",
+        description: "We've edited the painting in your collection.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    } catch (error) {
+      setErrors({ errorMessage: error.message });
+      toast({
+        title: "Whoops!",
+        description: error.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  //---------- RETURN ---------- //
+
   return (
     <Box padding="4" borderColor="cyan.400" borderWidth="1px">
       <Heading as="h1" color="cyan.400">
-        Add New Painting
+        {editMode ? "Edit Existing Painting" : "Add New Painting"}
       </Heading>
-      <Text>Fill in required fields to add to gallery</Text>
+      <Text>
+        Fill in required fields to{" "}
+        {editMode ? "edit in gallery" : "add to gallery"}
+      </Text>
 
       <Formik
+        enableReinitialize
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={handleSubmit}
+        onSubmit={editMode ? handleEdit : handleAdd}
       >
         {({ dirty, isValid, isSubmitting, errors }) => (
           <Form>

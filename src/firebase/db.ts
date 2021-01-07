@@ -1,11 +1,11 @@
-import { NewPainting, DBPainting } from "../common/types/types";
+import {DBPainting } from "../common/types/types";
 import { db } from "./config";
 
 export const fetchPaintingsFromDB = () => {
   return db.collection("paintings");
 };
 
-export const AddNewPaintingToDB = (painting: NewPainting) => {
+export const AddNewPaintingToDB = (painting: DBPainting) => {
   return db.collection("paintings").add(painting);
 };
 
