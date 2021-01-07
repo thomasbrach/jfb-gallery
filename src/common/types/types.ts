@@ -2,11 +2,11 @@ export type NewPainting = {
   name: string;
   imageUrl: string;
   paintedYear: string;
-  // type: string;
-  // techniques: string[];
-  // size: string;
-  // availability: boolean;
-  // price: string;
+  category: string;
+  techniques: string;
+  size: string;
+  availability: string;
+  price: string;
 };
 
 export type DBPainting = {
@@ -15,9 +15,9 @@ export type DBPainting = {
   imageUrl: string;
   paintedYear: string;
   category: string;
-  techniques: string[];
+  techniques: string;
   size: string;
-  availability: boolean;
+  availability: string;
   price: string;
 };
 

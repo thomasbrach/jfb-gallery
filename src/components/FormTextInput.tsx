@@ -27,7 +27,9 @@ const FormTextInput = (props: Props) => {
       isInvalid={meta.touched && !!meta.error}
       isRequired={isRequired}
     >
-      <FormLabel>{label}</FormLabel>
+      <FormLabel marginTop={2} marginBottom={1}>
+        {label}
+      </FormLabel>
       <InputGroup>
         {Icon && (
           <InputLeftElement>

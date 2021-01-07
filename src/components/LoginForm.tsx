@@ -29,14 +29,14 @@ const validationSchema = Yup.object().shape({
 const LoginForm = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = async (
+  const handleSubmit = (
     credentials: Fields,
     helpers: FormikHelpers<Fields>
   ) => {
     const { setSubmitting, setErrors } = helpers;
     try {
       setSubmitting(true);
-      await dispatch(signInUser(credentials));
+      dispatch(signInUser(credentials));
     } catch (error) {
       setErrors({ errorMessage: error.message });
     } finally {

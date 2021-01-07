@@ -13,16 +13,14 @@ import { addPainting } from "../redux/paintings/paintings.actions";
 type Fields = NewPainting & { errorMessage: string };
 
 const initialValues = {
-  //   id: "",
   name: "",
   imageUrl: "",
   paintedYear: "",
-  //   type: "",
-  //   description: "",
-  //   techniques: [],
-  //   size: "",
-  //   availability: false,
-  //   price: 0,
+  category: "",
+  techniques: "",
+  size: "",
+  availability: "",
+  price: "",
   errorMessage: "",
 };
 
@@ -30,19 +28,21 @@ const validationSchema = Yup.object().shape({
   name: Yup.string().required(),
   imageUrl: Yup.string().required(),
   paintedYear: Yup.string().required(),
+  category: Yup.string().required(),
+  techniques: Yup.string().required(),
+  size: Yup.string().required(),
+  availability: Yup.string().required(),
+  price: Yup.string().required(),
 });
 
 const UploadForm = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = async (
-    painting: Fields,
-    helpers: FormikHelpers<Fields>
-  ) => {
+  const handleSubmit = (painting: Fields, helpers: FormikHelpers<Fields>) => {
     const { setSubmitting, setErrors } = helpers;
     try {
       setSubmitting(true);
-      await dispatch(addPainting(painting));
+      dispatch(addPainting(painting));
     } catch (error) {
       setErrors({ errorMessage: error.message });
       console.log(error.message);
@@ -57,7 +57,6 @@ const UploadForm = () => {
         Add New Painting
       </Heading>
       <Text>Fill in required fields to add to gallery</Text>
-      <br />
 
       <Formik
         initialValues={initialValues}
@@ -73,7 +72,6 @@ const UploadForm = () => {
               type="text"
               isRequired={true}
             />
-            <br />
             <FormTextInput
               label="URL"
               name="imageUrl"
@@ -81,11 +79,45 @@ const UploadForm = () => {
               type="text"
               isRequired={true}
             />
-            <br />
             <FormTextInput
               label="Year Painted"
               name="paintedYear"
               placeholder={new Date().getFullYear().toString()}
+              type="text"
+              isRequired={true}
+            />
+            <FormTextInput
+              label="Category"
+              name="category"
+              placeholder="Category"
+              type="text"
+              isRequired={true}
+            />
+            <FormTextInput
+              label="Techniques"
+              name="techniques"
+              placeholder="Techniques"
+              type="text"
+              isRequired={true}
+            />
+            <FormTextInput
+              label="Size"
+              name="size"
+              placeholder="Height x Width"
+              type="text"
+              isRequired={true}
+            />
+            <FormTextInput
+              label="Availability"
+              name="availability"
+              placeholder="Yes or No"
+              type="text"
+              isRequired={true}
+            />
+            <FormTextInput
+              label="Price"
+              name="price"
+              placeholder="€XX"
               type="text"
               isRequired={true}
             />
