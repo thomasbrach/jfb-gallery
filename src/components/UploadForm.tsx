@@ -4,11 +4,12 @@ import { Form, Formik, FormikHelpers } from "formik";
 import Button from "./Button";
 import * as Yup from "yup";
 import FormTextInput from "./FormTextInput";
-import { CheckIcon } from "@chakra-ui/icons";
+import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addPainting,
   editPainting,
+  exitEditMode,
 } from "../redux/paintings/paintings.actions";
 import { RootState } from "../redux/root.reducer";
 import { DBPainting } from "../common/types/types";
@@ -70,8 +71,6 @@ const UploadForm = () => {
         duration: 5000,
         isClosable: true,
       });
-    } finally {
-      setSubmitting(false);
     }
   };
 
@@ -178,9 +177,22 @@ const UploadForm = () => {
               isRequired={true}
             />
             <Flex marginTop={4}>
-              <Spacer />
+              {editMode && (
+                <>
+                  <Button
+                    w="45%"
+                    bgColor="red.400"
+                    _hover={{ bgColor: "red.600" }}
+                    color="white"
+                    content="Exit Edit Mode"
+                    onClick={() => dispatch(exitEditMode())}
+                    rightIcon={<CloseIcon />}
+                  />
+                  <Spacer />
+                </>
+              )}
               <Button
-                w="100%"
+                w={editMode ? "45%" : "100%"}
                 bgColor="cyan.400"
                 color="white"
                 isDisabled={!isValid || !dirty || isSubmitting}

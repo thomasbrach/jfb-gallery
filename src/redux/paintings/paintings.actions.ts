@@ -42,10 +42,10 @@ export const addPaintingStart = () => ({
   type: PAINTINGS.ADD_PAINTING_START,
 });
 
-export const addPaintingSuccess = (painting: DBPainting) => ({
+export const addPaintingSuccess = () => ({
   type: PAINTINGS.ADD_PAINTING_SUCCESS,
-  payload: painting
 });
+
 export const addPaintingFailure = (errorMessage: string) => ({
   type: PAINTINGS.ADD_PAINTING_FAILURE,
   payload: errorMessage,
@@ -56,7 +56,8 @@ export const addPainting = (painting: DBPainting) => {
     dispatch(addPaintingStart());
     try {
       await AddNewPaintingToDB(painting);
-      dispatch(addPaintingSuccess(painting));
+      dispatch(addPaintingSuccess());
+      dispatch(fetchPaintings())
     } catch (error) {
       dispatch(addPaintingFailure(error));
       throw error;
@@ -86,6 +87,10 @@ export const enterEditMode = (painting: DBPainting) => ({
   payload: painting
 });
 
+export const exitEditMode = () => ({
+  type: PAINTINGS.EXIT_EDIT_MODE,
+});
+
 export const editPaintingStart = () => ({
   type: PAINTINGS.EDIT_PAINTING_START,
 });
@@ -98,7 +103,6 @@ export const editPaintingFailure = (errorMessage: string) => ({
   type: PAINTINGS.EDIT_PAINTING_FAILURE,
   payload: errorMessage,
 });
-
 
 export const editPainting = (painting: DBPainting) => {
   return async (dispatch: any) => {

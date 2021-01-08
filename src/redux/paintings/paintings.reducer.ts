@@ -71,7 +71,6 @@ const paintingsReducer = (state = INITIAL_STATE, action: Action) => {
       return {
         ...state,
         isLoading: false,
-        paintings: [...state.paintings, action.payload]
       };
 
     case PAINTINGS.EDIT_PAINTING_SUCCESS:
@@ -116,6 +115,24 @@ case PAINTINGS.ENTER_EDIT_MODE:
     editMode: true,
     editablePainting: action.payload
   }
+
+  case PAINTINGS.EXIT_EDIT_MODE:
+    return {
+      ...state,
+      editMode: false,
+     editablePainting: {
+        id: "",
+        name: "",
+        imageUrl: "",
+        paintedYear: "",
+        category: "",
+        techniques: "",
+        size: "",
+        availability: "",
+        price: "",
+        errorMessage: "",
+      }
+    }
 
     default:
       return state;

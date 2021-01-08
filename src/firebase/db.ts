@@ -4,6 +4,10 @@ import { db } from "./config";
 export const fetchPaintingsFromDB = () => {
   return db.collection("paintings");
 };
+// 
+// export const fetchSinglePaintingFromDB = (paintingId: DBPainting["id"]) => {
+//   return db.collection("paintings").doc(paintingId).get()
+// }
 
 export const AddNewPaintingToDB = (painting: DBPainting) => {
   return db.collection("paintings").add(painting);

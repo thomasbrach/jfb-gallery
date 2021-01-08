@@ -1,5 +1,5 @@
 export type DBPainting = {
-  id?: string;
+  id: string;
   name: string;
   imageUrl: string;
   paintedYear: string;
