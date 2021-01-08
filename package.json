@@ -18,6 +18,7 @@
     "@types/redux-logger": "^3.0.8",
     "@types/redux-persist": "^4.3.1",
     "dotenv": "^8.2.0",
+    "emailjs-com": "^2.6.4",
     "firebase": "^8.2.1",
     "formik": "^2.2.6",
     "framer-motion": "^3.1.1",

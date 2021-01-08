@@ -1,9 +1,13 @@
+import { Center } from "@chakra-ui/react";
 import React from "react";
+import ContactForm from "../components/ContactForm";
 
 const ContactView = () => {
   return (
     <>
-      Contact
+      <Center>
+        <ContactForm />
+      </Center>
     </>
   );
 };
