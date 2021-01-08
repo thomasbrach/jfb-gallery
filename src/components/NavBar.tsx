@@ -5,7 +5,14 @@ import {
   SettingsIcon,
   ViewIcon,
 } from "@chakra-ui/icons";
-import { Box, ButtonGroup, Center, Flex, Spacer } from "@chakra-ui/react";
+import {
+  Box,
+  ButtonGroup,
+  Center,
+  Flex,
+  Spacer,
+  useToast,
+} from "@chakra-ui/react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SignOutUser } from "../redux/auth/auth.actions";
@@ -15,9 +22,17 @@ import Button from "./Button";
 const NavBar = () => {
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
+  const toast = useToast();
 
   const handleLogOut = () => {
     dispatch(SignOutUser());
+    toast({
+      title: "Success!",
+      description: "You're successfully logged out.",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
   };
 
   return (

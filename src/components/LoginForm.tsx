@@ -14,6 +14,7 @@ import FormTextInput from "./FormTextInput";
 import { ChevronRightIcon, EmailIcon, LockIcon } from "@chakra-ui/icons";
 import { signInUser } from "../redux/auth/auth.actions";
 import { useDispatch } from "react-redux";
+import { useMountedRef } from "../hooks/useMountedRef";
 
 type Fields = {
   email: string;
@@ -35,15 +36,23 @@ const validationSchema = Yup.object().shape({
 const LoginForm = () => {
   const dispatch = useDispatch();
   const toast = useToast();
+  const isMounted = useMountedRef();
 
-  const handleSubmit = (
+  const handleSubmit = async (
     credentials: Fields,
     helpers: FormikHelpers<Fields>
   ) => {
     const { setSubmitting, setErrors } = helpers;
     try {
       setSubmitting(true);
-      dispatch(signInUser(credentials));
+      await dispatch(signInUser(credentials));
+      toast({
+        title: "Success!",
+        description: "You're successfully logged in.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
     } catch (error) {
       setErrors({ errorMessage: error.message });
       toast({
@@ -54,7 +63,7 @@ const LoginForm = () => {
         isClosable: true,
       });
     } finally {
-      setSubmitting(false);
+      if (isMounted.current) setSubmitting(false);
     }
   };
 

@@ -13,6 +13,7 @@ import {
 } from "../redux/paintings/paintings.actions";
 import { RootState } from "../redux/root.reducer";
 import { DBPainting } from "../common/types/types";
+import { useMountedRef } from "../hooks/useMountedRef";
 
 type Fields = DBPainting & { errorMessage: string };
 
@@ -33,6 +34,7 @@ const UploadForm = () => {
   );
   const dispatch = useDispatch();
   const toast = useToast();
+  const isMounted = useMountedRef();
 
   //---------- INITIAL VALUES ---------- //
 
@@ -71,6 +73,8 @@ const UploadForm = () => {
         duration: 5000,
         isClosable: true,
       });
+    } finally {
+      if (isMounted.current) setSubmitting(false);
     }
   };
 
@@ -97,6 +101,8 @@ const UploadForm = () => {
         duration: 5000,
         isClosable: true,
       });
+    } finally {
+      if (isMounted.current) setSubmitting(false);
     }
   };
 
