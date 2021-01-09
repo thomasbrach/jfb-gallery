@@ -11,7 +11,13 @@ const PaintingPreview = ({ painting }: Prop) => {
   const { id, name, imageUrl } = painting;
 
   return (
-    <GridItem colSpan={1} rowSpan={1} maxWidth="xs" _hover={{ opacity: 0.8 }}>
+    <GridItem
+      colSpan={1}
+      rowSpan={1}
+      maxWidth="xs"
+      _hover={{ opacity: 0.8 }}
+      justifySelf="center"
+    >
       <Link to={`/painting/${id}`}>
         <Image
           src={imageUrl}
