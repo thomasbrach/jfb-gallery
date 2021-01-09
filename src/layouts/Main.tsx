@@ -11,7 +11,7 @@ const MainLayout = (props: Props) => {
   const { children } = props;
 
   return (
-    <Container maxWidth="7xl" padding="4">
+    <Container height="100vh" maxWidth="7xl" padding="4">
       <NavBar />
       <Box height="3xl">{children}</Box>
       <Footer />

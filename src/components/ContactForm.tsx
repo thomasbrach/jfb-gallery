@@ -76,11 +76,17 @@ const ContactForm = () => {
   };
 
   return (
-    <Container padding="4" borderColor="cyan.400" borderWidth="1px">
-      <Heading as="h1" color="cyan.400">
+    <Container
+      padding="4"
+      borderColor="gray.600"
+      borderWidth="1px"
+      bgColor="white"
+      boxShadow="dark-lg"
+    >
+      <Heading as="h1" color="gray.600" fontFamily="Permanent Marker, serif">
         Contactez-moi
       </Heading>
-      <Text>Rédigez puis envoyer votre message !</Text>
+      <Text color="gray.600">Rédigez puis envoyer votre message !</Text>
 
       <Formik
         initialValues={initialValues}
@@ -114,12 +120,13 @@ const ContactForm = () => {
               <Spacer />
               <Button
                 w="100%"
-                bgColor="cyan.400"
-                color="white"
                 isDisabled={!isValid || !dirty || isSubmitting}
                 isLoading={isSubmitting}
                 content="Envoyer"
                 type="submit"
+                bgColor="gray.600"
+                _hover={{ bgColor: "gray.800" }}
+                color="white"
               />
             </Flex>
           </Form>

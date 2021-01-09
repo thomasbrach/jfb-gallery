@@ -109,8 +109,14 @@ const UploadForm = () => {
   //---------- RETURN ---------- //
 
   return (
-    <Box padding="4" borderColor="cyan.400" borderWidth="1px">
-      <Heading as="h1" color="cyan.400">
+    <Box
+      padding="4"
+      borderColor="gray.700"
+      borderWidth="1px"
+      bgColor="white"
+      boxShadow="dark-lg"
+    >
+      <Heading as="h1" color="gray.600" fontFamily="Permanent Marker, serif">
         {editMode ? "Editer un tableau" : "Ajouter un tableau"}
       </Heading>
       <Text>
@@ -199,13 +205,14 @@ const UploadForm = () => {
               )}
               <Button
                 w={editMode ? "45%" : "100%"}
-                bgColor="cyan.400"
                 color="white"
                 isDisabled={!isValid || !dirty || isSubmitting}
                 isLoading={isSubmitting}
                 content="Confirmer"
                 type="submit"
                 rightIcon={<CheckIcon />}
+                bgColor="gray.600"
+                _hover={{ bgColor: "gray.800" }}
               />
             </Flex>
           </Form>

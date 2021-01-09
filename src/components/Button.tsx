@@ -9,7 +9,14 @@ const Button = (props: ButtonType) => {
   const { to, content, ...rest } = props;
   return to ? (
     <Link to={to}>
-      <ChakraButton {...rest}>{content}</ChakraButton>
+      <ChakraButton
+        {...rest}
+        bgColor="gray.700"
+        _hover={{ bgColor: "gray.900" }}
+        color="white"
+      >
+        {content}
+      </ChakraButton>
     </Link>
   ) : (
     <ChakraButton {...rest}>{content}</ChakraButton>

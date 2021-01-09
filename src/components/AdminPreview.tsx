@@ -73,7 +73,12 @@ const AdminPreview = ({ painting }: Prop) => {
   };
 
   return (
-    <GridItem borderColor="cyan.400" borderWidth="1px">
+    <GridItem
+      borderColor="gray.400"
+      borderWidth="1px"
+      color="black"
+      bgColor="white"
+    >
       <Flex padding={2}>
         <Link to={`/painting/${id}`}>
           <Image
@@ -82,6 +87,7 @@ const AdminPreview = ({ painting }: Prop) => {
             fit="cover"
             boxSize="3xs"
             _hover={{ opacity: 0.8 }}
+            boxShadow="dark-lg"
           />
         </Link>
         <Center>
@@ -111,7 +117,7 @@ const AdminPreview = ({ painting }: Prop) => {
           <EditIcon
             w={8}
             h={8}
-            color="cyan.400"
+            color="gray.600"
             onClick={enterEditModeWithPainting(painting)}
             cursor="pointer"
             _hover={{ color: "cyan.600" }}

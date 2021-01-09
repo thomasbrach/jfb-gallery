@@ -12,7 +12,7 @@ import RouteWithLayout from "./RouteWithLayout";
 
 const RootRouter = () => {
   return (
-    <>
+    <div>
       <RouteWithLayout
         exact
         path={ROUTES.HOME}
@@ -48,7 +48,7 @@ const RootRouter = () => {
         layout={MainLayout}
         component={AdminView}
       />
-    </>
+    </div>
   );
 };
 

@@ -10,6 +10,7 @@ import {
   ButtonGroup,
   Center,
   Flex,
+  Heading,
   Spacer,
   useToast,
 } from "@chakra-ui/react";
@@ -36,27 +37,50 @@ const NavBar = () => {
   };
 
   return (
-    <Box padding="4">
+    <Box padding={4} paddingBottom={6}>
       <Flex>
         <Center>
-          <h1>Jean-François Brach Gallery</h1>
+          <Heading
+            fontSize="4xl"
+            fontFamily="'Permanent Marker', serif"
+            color="gray.700"
+          >
+            Jean-François Brach
+          </Heading>
         </Center>
         <Spacer />
         <ButtonGroup>
-          <Button to="/" content="Home" rightIcon={<InfoIcon />} />
-          <Button to="/gallery" content="Galerie" rightIcon={<ViewIcon />} />
-          <Button to="/contact" content="Contact" rightIcon={<EmailIcon />} />
+          <Button
+            to="/"
+            content="Home"
+            rightIcon={<InfoIcon />}
+            boxShadow="dark-lg"
+          />
+          <Button
+            to="/gallery"
+            content="Galerie"
+            rightIcon={<ViewIcon />}
+            boxShadow="dark-lg"
+          />
+          <Button
+            to="/contact"
+            content="Contact"
+            rightIcon={<EmailIcon />}
+            boxShadow="dark-lg"
+          />
           {isAuthenticated && (
             <>
               <Button
                 to="/admin"
                 content="Admin"
                 rightIcon={<SettingsIcon />}
+                boxShadow="dark-lg"
               />
               <Button
                 content="Déconnexion"
                 rightIcon={<MoonIcon />}
                 onClick={handleLogOut}
+                boxShadow="dark-lg"
               />
             </>
           )}

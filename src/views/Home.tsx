@@ -6,7 +6,15 @@ import Button from "../components/Button";
 const HomeView = () => {
   return (
     <Center height="3xl">
-      <Grid gap={4} justifyContent="center">
+      <Grid
+        gap={4}
+        justifyContent="center"
+        padding={4}
+        borderColor="gray.600"
+        borderWidth="1px"
+        bgColor="white"
+        boxShadow="dark-lg"
+      >
         <GridItem>Bienvenue sur ma galerie !</GridItem>
         <GridItem>
           Blah blah blah <br />
@@ -18,15 +26,32 @@ const HomeView = () => {
         </GridItem>
         <GridItem>Pour accéder à mes tableaux :</GridItem>
         <GridItem justifySelf="center">
-          <Button to="/gallery" content="Galerie" rightIcon={<ViewIcon />} />
+          <Button
+            to="/gallery"
+            content="Galerie"
+            rightIcon={<ViewIcon />}
+            boxShadow="dark-lg"
+          />
         </GridItem>
         <GridItem>
           Pour discuter, me proposer des projets et acheter mes oeuvres :
         </GridItem>
         <GridItem justifySelf="center">
-          <Button to="/contact" content="Contact" rightIcon={<EmailIcon />} />
+          <Button
+            to="/contact"
+            content="Contact"
+            rightIcon={<EmailIcon />}
+            boxShadow="dark-lg"
+          />
         </GridItem>
-        <GridItem textAlign="right">Jean-François Brach</GridItem>
+        <GridItem
+          textAlign="right"
+          justifySelf="right"
+          color="gray.600"
+          fontFamily="Permanent Marker, serif"
+        >
+          Jean-François Brach
+        </GridItem>
       </Grid>
     </Center>
   );

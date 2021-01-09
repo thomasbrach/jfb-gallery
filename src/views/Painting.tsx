@@ -27,15 +27,22 @@ const PaintingView = ({ match }: any) => {
       <GridItem justifySelf="center">
         <Image
           maxWidth="6xl"
-          maxHeight="xl"
+          maxHeight="lg"
           src={imageUrl}
           alt={name}
           _hover={{ opacity: 0.8 }}
+          boxShadow="dark-lg"
         />
       </GridItem>
       <GridItem justifySelf="center">
-        <Flex>
-          <Box paddingLeft="32px">
+        <Flex
+          padding="4"
+          borderColor="gray.600"
+          borderWidth="1px"
+          bgColor="white"
+          boxShadow="dark-lg"
+        >
+          <Box paddingRight="16px">
             <Text fontWeight="bold">Nom</Text>
             <Text fontWeight="bold">Année</Text>
             <Text fontWeight="bold">Catégorie</Text>
@@ -44,7 +51,7 @@ const PaintingView = ({ match }: any) => {
             <Text fontWeight="bold">Disponibilité</Text>
             <Text fontWeight="bold">Prix en € </Text>
           </Box>
-          <Box paddingLeft="64px">
+          <Box paddingLeft="16px">
             <Text>{name}</Text>
             <Text>{paintedYear}</Text>
             <Text>{category}</Text>
