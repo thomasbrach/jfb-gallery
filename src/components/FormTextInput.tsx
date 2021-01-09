@@ -14,7 +14,7 @@ type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   name: string;
   label: string;
   icon?: ComponentWithAs<"svg", IconProps>;
-  placeholder: string;
+  placeholder?: string;
   isRequired?: boolean;
 };
 

@@ -44,7 +44,7 @@ const NavBar = () => {
         <Spacer />
         <ButtonGroup>
           <Button to="/" content="Home" rightIcon={<InfoIcon />} />
-          <Button to="/gallery" content="Gallery" rightIcon={<ViewIcon />} />
+          <Button to="/gallery" content="Galerie" rightIcon={<ViewIcon />} />
           <Button to="/contact" content="Contact" rightIcon={<EmailIcon />} />
           {isAuthenticated && (
             <>
@@ -54,7 +54,7 @@ const NavBar = () => {
                 rightIcon={<SettingsIcon />}
               />
               <Button
-                content="Log out"
+                content="Déconnexion"
                 rightIcon={<MoonIcon />}
                 onClick={handleLogOut}
               />

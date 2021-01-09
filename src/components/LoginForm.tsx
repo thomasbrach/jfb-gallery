@@ -70,10 +70,9 @@ const LoginForm = () => {
   return (
     <Container padding="4" borderColor="cyan.400" borderWidth="1px">
       <Heading as="h1" color="cyan.400">
-        Admin Access
+        Accès Administrateur
       </Heading>
-      <Text>Login and manage your gallery</Text>
-      <br />
+      <Text>Connectez-vous pour gérer la galerie</Text>
 
       <Formik
         initialValues={initialValues}
@@ -90,24 +89,23 @@ const LoginForm = () => {
               isRequired={true}
               icon={EmailIcon}
             />
-            <br />
             <FormTextInput
-              label="Password"
+              label="Mot de passe"
               name="password"
               placeholder="4dM1nP4ssW0rD!"
               type="password"
               isRequired={true}
               icon={LockIcon}
             />
-            <Flex>
+            <Flex marginTop={4}>
               <Spacer />
               <Button
-                w="2xs"
+                w="100%"
                 bgColor="cyan.400"
                 color="white"
                 isDisabled={!isValid || !dirty || isSubmitting}
                 isLoading={isSubmitting}
-                content="Login"
+                content="Se connecter"
                 type="submit"
                 rightIcon={<ChevronRightIcon />}
               />

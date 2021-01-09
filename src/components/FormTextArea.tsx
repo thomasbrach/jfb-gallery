@@ -14,12 +14,13 @@ type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   name: string;
   label: string;
   icon?: ComponentWithAs<"svg", IconProps>;
-  placeholder: string;
+  placeholder?: string;
   isRequired?: boolean;
+  rows?: number;
 };
 
 const FormTextArea = (props: Props) => {
-  const { label, icon: Icon, placeholder, isRequired, ...rest } = props;
+  const { label, icon: Icon, placeholder, isRequired, rows, ...rest } = props;
   const [field, meta] = useField(rest);
 
   return (
@@ -36,7 +37,7 @@ const FormTextArea = (props: Props) => {
             <Icon />
           </InputLeftElement>
         )}
-        <Textarea placeholder={placeholder} {...field} />
+        <Textarea rows={rows} placeholder={placeholder} {...field} />
       </InputGroup>
     </FormControl>
   );

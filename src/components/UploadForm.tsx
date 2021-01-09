@@ -111,11 +111,11 @@ const UploadForm = () => {
   return (
     <Box padding="4" borderColor="cyan.400" borderWidth="1px">
       <Heading as="h1" color="cyan.400">
-        {editMode ? "Edit Existing Painting" : "Add New Painting"}
+        {editMode ? "Editer un tableau" : "Ajouter un tableau"}
       </Heading>
       <Text>
-        Fill in required fields to{" "}
-        {editMode ? "edit in gallery" : "add to gallery"}
+        Remplir les champs pour{" "}
+        {editMode ? "éditer dans la galerie" : "ajouter à la galerie"}
       </Text>
 
       <Formik
@@ -127,7 +127,7 @@ const UploadForm = () => {
         {({ dirty, isValid, isSubmitting, errors }) => (
           <Form>
             <FormTextInput
-              label="Name"
+              label="Nom"
               name="name"
               placeholder="Name"
               type="text"
@@ -141,14 +141,14 @@ const UploadForm = () => {
               isRequired={true}
             />
             <FormTextInput
-              label="Year Painted"
+              label="Année"
               name="paintedYear"
               placeholder={new Date().getFullYear().toString()}
               type="text"
               isRequired={true}
             />
             <FormTextInput
-              label="Category"
+              label="Catégorie"
               name="category"
               placeholder="Category"
               type="text"
@@ -162,23 +162,23 @@ const UploadForm = () => {
               isRequired={true}
             />
             <FormTextInput
-              label="Size"
+              label="Dimensions"
               name="size"
-              placeholder="Height x Width"
+              placeholder="Hauteur x Largeur"
               type="text"
               isRequired={true}
             />
             <FormTextInput
-              label="Availability"
+              label="Disponibilité"
               name="availability"
-              placeholder="Yes or No"
+              placeholder="Oui ou Non"
               type="text"
               isRequired={true}
             />
             <FormTextInput
-              label="Price"
+              label="Prix en €"
               name="price"
-              placeholder="€XX"
+              placeholder="sera N/A si indisponible "
               type="text"
               isRequired={true}
             />
@@ -190,7 +190,7 @@ const UploadForm = () => {
                     bgColor="red.400"
                     _hover={{ bgColor: "red.600" }}
                     color="white"
-                    content="Exit Edit Mode"
+                    content="Annuler"
                     onClick={() => dispatch(exitEditMode())}
                     rightIcon={<CloseIcon />}
                   />
@@ -203,7 +203,7 @@ const UploadForm = () => {
                 color="white"
                 isDisabled={!isValid || !dirty || isSubmitting}
                 isLoading={isSubmitting}
-                content="Submit"
+                content="Confirmer"
                 type="submit"
                 rightIcon={<CheckIcon />}
               />

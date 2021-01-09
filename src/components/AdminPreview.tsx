@@ -86,23 +86,23 @@ const AdminPreview = ({ painting }: Prop) => {
         </Link>
         <Center>
           <Flex>
-            <Box paddingLeft="64px">
-              <Text>Name:</Text>
-              <Text>Year Painted:</Text>
-              <Text>Category:</Text>
-              <Text>Techniques: </Text>
-              <Text>Size: </Text>
-              <Text>Availability: </Text>
-              <Text>Price: </Text>
+            <Box paddingLeft="32px">
+              <Text fontWeight="bold">Nom</Text>
+              <Text fontWeight="bold">Année</Text>
+              <Text fontWeight="bold">Catégorie</Text>
+              <Text fontWeight="bold">Techniques</Text>
+              <Text fontWeight="bold">Dimensions</Text>
+              <Text fontWeight="bold">Disponibilité</Text>
+              <Text fontWeight="bold">Prix en € </Text>
             </Box>
-            <Box paddingLeft="128px">
+            <Box paddingLeft="64px">
               <Text>{name}</Text>
               <Text>{paintedYear}</Text>
-              <Text>{category ? category : "N/A"}</Text>
-              <Text>{techniques ? techniques : "N/A"}</Text>
-              <Text>{size ? size : "N/A"}</Text>
-              <Text>{availability ? availability : "N/A"}</Text>
-              <Text>{price ? price : "N/A"}</Text>
+              <Text>{category}</Text>
+              <Text>{techniques}</Text>
+              <Text>{size}</Text>
+              <Text>{availability}</Text>
+              <Text>{availability === "Oui" ? price : "N/A"}</Text>
             </Box>
           </Flex>
         </Center>

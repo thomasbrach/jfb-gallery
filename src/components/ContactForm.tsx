@@ -35,7 +35,7 @@ const validationSchema = Yup.object().shape({
   message: Yup.string().required(),
 });
 
-const LoginForm = () => {
+const ContactForm = () => {
   const toast = useToast();
   const isMounted = useMountedRef();
 
@@ -54,8 +54,8 @@ const LoginForm = () => {
         process.env.REACT_APP_EMAIL_JS_USER_ID
       );
       toast({
-        title: "Success!",
-        description: "Your message has been sent.",
+        title: "Succès",
+        description: "Votre message a bien été envoyé !",
         status: "success",
         duration: 5000,
         isClosable: true,
@@ -63,8 +63,9 @@ const LoginForm = () => {
     } catch (error) {
       setErrors({ errorMessage: error.message });
       toast({
-        title: "Whoops!",
-        description: error.message,
+        title: "Erreur",
+        description:
+          "Il y a un problème avec votre message. Merci de réessayer plus tard.",
         status: "error",
         duration: 5000,
         isClosable: true,
@@ -77,10 +78,9 @@ const LoginForm = () => {
   return (
     <Container padding="4" borderColor="cyan.400" borderWidth="1px">
       <Heading as="h1" color="cyan.400">
-        Contact Jean-François Brach
+        Contactez-moi
       </Heading>
-      <Text>Write and send a message</Text>
-      <br />
+      <Text>Rédigez puis envoyer votre message !</Text>
 
       <Formik
         initialValues={initialValues}
@@ -90,27 +90,27 @@ const LoginForm = () => {
         {({ dirty, isValid, isSubmitting, errors }) => (
           <Form>
             <FormTextInput
-              label="Your Name"
+              label="Votre Nom"
               name="user_name"
-              placeholder="Your Name"
+              placeholder="Votre Nom"
               type="text"
               isRequired={true}
             />
             <FormTextInput
-              label="Your Email"
+              label="Votre Email"
               name="user_email"
-              placeholder="your@email.com"
+              placeholder="votre@email.com"
               type="email"
               isRequired={true}
             />
             <FormTextArea
               name="message"
-              label="Your Message"
-              placeholder="Your Message Here..."
+              label="Votre Message"
+              placeholder="Rédigez votre message..."
               isRequired={true}
+              rows={6}
             />
-            <br />
-            <Flex>
+            <Flex marginTop={4}>
               <Spacer />
               <Button
                 w="100%"
@@ -118,7 +118,7 @@ const LoginForm = () => {
                 color="white"
                 isDisabled={!isValid || !dirty || isSubmitting}
                 isLoading={isSubmitting}
-                content="Send Message"
+                content="Envoyer"
                 type="submit"
               />
             </Flex>
@@ -129,4 +129,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default ContactForm;
