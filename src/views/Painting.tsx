@@ -41,6 +41,7 @@ const PaintingView = ({ match }: any) => {
           borderWidth="1px"
           bgColor="white"
           boxShadow="dark-lg"
+          rounded="lg"
         >
           <Box paddingRight="16px">
             <Text fontWeight="bold">Nom</Text>

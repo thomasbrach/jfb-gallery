@@ -115,6 +115,7 @@ const UploadForm = () => {
       borderWidth="1px"
       bgColor="white"
       boxShadow="dark-lg"
+      rounded="lg"
     >
       <Heading as="h1" color="gray.600" fontFamily="Permanent Marker, serif">
         {editMode ? "Editer un tableau" : "Ajouter un tableau"}

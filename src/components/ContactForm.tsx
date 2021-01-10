@@ -82,6 +82,7 @@ const ContactForm = () => {
       borderWidth="1px"
       bgColor="white"
       boxShadow="dark-lg"
+      rounded="lg"
     >
       <Heading as="h1" color="gray.600" fontFamily="Permanent Marker, serif">
         Contactez-moi

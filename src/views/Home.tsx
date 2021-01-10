@@ -14,6 +14,7 @@ const HomeView = () => {
         borderWidth="1px"
         bgColor="white"
         boxShadow="dark-lg"
+        rounded="lg"
       >
         <GridItem>Bienvenue sur ma galerie !</GridItem>
         <GridItem>

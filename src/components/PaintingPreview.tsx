@@ -12,11 +12,10 @@ const PaintingPreview = ({ painting }: Prop) => {
 
   return (
     <GridItem
-      colSpan={1}
-      rowSpan={1}
       maxWidth="xs"
       _hover={{ opacity: 0.8 }}
       justifySelf="center"
+      alignSelf="center"
     >
       <Link to={`/painting/${id}`}>
         <Image

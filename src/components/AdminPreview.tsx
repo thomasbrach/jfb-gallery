@@ -78,6 +78,7 @@ const AdminPreview = ({ painting }: Prop) => {
       borderWidth="1px"
       color="black"
       bgColor="white"
+      rounded="lg"
     >
       <Flex padding={2}>
         <Link to={`/painting/${id}`}>
