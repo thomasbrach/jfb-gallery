@@ -1,4 +1,12 @@
-import { Box, Flex, Grid, GridItem, Image, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Grid,
+  GridItem,
+  Image,
+  Spinner,
+  Text,
+} from "@chakra-ui/react";
 import React from "react";
 import { useSelector } from "react-redux";
 import { DBPainting } from "../common/types/types";
@@ -25,14 +33,17 @@ const PaintingView = ({ match }: any) => {
   return (
     <Grid gap={4}>
       <GridItem justifySelf="center">
-        <Image
-          maxWidth="6xl"
-          maxHeight="lg"
-          src={imageUrl}
-          alt={name}
-          _hover={{ opacity: 0.8 }}
-          boxShadow="dark-lg"
-        />
+        <a href={imageUrl} target="_blank" rel="noreferrer">
+          <Image
+            maxWidth="6xl"
+            maxHeight="lg"
+            src={imageUrl}
+            alt={name}
+            _hover={{ opacity: 0.8 }}
+            boxShadow="dark-lg"
+            fallback={<Spinner />}
+          />
+        </a>
       </GridItem>
       <GridItem justifySelf="center">
         <Flex

@@ -14,6 +14,7 @@ import {
 import { RootState } from "../redux/root.reducer";
 import { DBPainting } from "../common/types/types";
 import { useMountedRef } from "../hooks/useMountedRef";
+import FormTextSelect from "./FormTextSelect";
 
 type Fields = DBPainting & { errorMessage: string };
 
@@ -157,7 +158,7 @@ const UploadForm = () => {
             <FormTextInput
               label="Catégorie"
               name="category"
-              placeholder="Category"
+              placeholder="Catégorie"
               type="text"
               isRequired={true}
             />
@@ -175,13 +176,16 @@ const UploadForm = () => {
               type="text"
               isRequired={true}
             />
-            <FormTextInput
+            <FormTextSelect
               label="Disponibilité"
               name="availability"
-              placeholder="Oui ou Non"
+              placeholder="Sélectionner"
               type="text"
               isRequired={true}
-            />
+            >
+              <option>Oui</option>
+              <option>Non</option>
+            </FormTextSelect>
             <FormTextInput
               label="Prix en €"
               name="price"

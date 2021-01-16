@@ -1,4 +1,4 @@
-import { GridItem, Image } from "@chakra-ui/react";
+import { GridItem, Image, Spinner } from "@chakra-ui/react";
 import React from "react";
 import { Link } from "react-router-dom";
 import { DBPainting } from "../common/types/types";
@@ -14,8 +14,8 @@ const PaintingPreview = ({ painting }: Prop) => {
     <GridItem
       maxWidth="xs"
       _hover={{ opacity: 0.8 }}
-      justifySelf="center"
       alignSelf="center"
+      justifySelf="center"
     >
       <Link to={`/painting/${id}`}>
         <Image
@@ -23,7 +23,8 @@ const PaintingPreview = ({ painting }: Prop) => {
           alt={name}
           fit="cover"
           height="xs"
-          boxShadow="dark-lg"
+          boxShadow="xl"
+          fallback={<Spinner />}
         />
       </Link>
     </GridItem>

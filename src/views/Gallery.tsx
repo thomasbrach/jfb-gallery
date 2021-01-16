@@ -21,6 +21,7 @@ const GalleryView = () => {
         height="3xl"
         overflowY="auto"
         templateColumns="repeat(5, 1fr)"
+        padding={4}
       >
         {paintings.map((painting: DBPainting) => (
           <PaintingPreview key={painting.id} painting={painting} />
