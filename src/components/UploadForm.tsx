@@ -155,13 +155,22 @@ const UploadForm = () => {
               type="text"
               isRequired={true}
             />
-            <FormTextInput
+            <FormTextSelect
               label="Catégorie"
               name="category"
-              placeholder="Catégorie"
+              placeholder="Sélectionner"
               type="text"
               isRequired={true}
-            />
+            >
+              <option>Portrait</option>
+              <option>Paysage</option>
+              <option>Nature Morte</option>
+              <option>Objets</option>
+              <option>Figuratif</option>
+              <option>Abstrait</option>
+              <option>Géométrie</option>
+              <option>Semi-Figuratif</option>
+            </FormTextSelect>
             <FormTextInput
               label="Techniques"
               name="techniques"
