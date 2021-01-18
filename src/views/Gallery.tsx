@@ -22,6 +22,20 @@ const GalleryView = () => {
         overflowY="auto"
         templateColumns="repeat(5, 1fr)"
         padding={4}
+        css={{
+          "&::-webkit-scrollbar": {
+            width: "6px",
+            backgroundColor: "#F5F5F5",
+          },
+          "&::-webkit-scrollbar-track": {
+            webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.3)",
+            backgroundColor: "#F5F5F5",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,.3)",
+            backgroundColor: "#555",
+          },
+        }}
       >
         {paintings.map((painting: DBPainting) => (
           <PaintingPreview key={painting.id} painting={painting} />
